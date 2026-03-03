@@ -1,10 +1,27 @@
-from flask import Flask, render_template
-app = Flask(__name__)
+from flask import Flask, render_template, request
+from datetime import datetime
+
+app = Flask(__name__, template_folder='template')
 
 
 @app.route('/')
 def index():
-    return render_template('index.html', title='Home', user='Alice')
+    name = request.args.get('name')
+    if not name or not name.strip():
+        name = 'Guest'
+    else:
+        name = name.strip()
+    return render_template(
+        'index.html',
+        title='Home',
+        user=name,
+        current_time=datetime.utcnow()
+    )
+
+
+@app.route('/form')
+def form():
+    return render_template('form.html')
 
 
 if __name__ == "__main__":
