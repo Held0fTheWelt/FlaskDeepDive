@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>All Users</title>
+    </head>
+    <body>
+        <h1>All Users</h1>
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Country</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name, details in users.items() %}
+                <tr>
+                    <td>{{ name }}</td>
+                    <td>{{ details['age'] }}</td>
+                    <td>{{ details['country'] }}</td>
+                    <td>
+                        {% if details['country'] == 'USA' %}
+                            Welcome!
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p><a href="/">Home</a> | <a href="/form">Form</a> | <a href="/all-users">All Users</a></p>
+    </body>
+</html>

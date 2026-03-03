@@ -3,7 +3,33 @@
         <title>{{ title }}</title>
     </head>
     <body>
+        <p><a href="/">Home</a> | <a href="/form">Form</a> | <a href="/all-users">All Users</a></p>
         <h1>Hello, {{ user }}!</h1>
         <p>Current time (UTC): {{ current_time.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+
+        {% if user in users %}
+            {% set details = users[user] %}
+            <h2>Your profile</h2>
+            <p>You are <strong>{{ details['age'] }}</strong> years old and from <strong>{{ details['country'] }}</strong>.</p>
+            {% if details['country'] == 'USA' %}
+                <p>Special message for USA users: Welcome!</p>
+            {% endif %}
+        {% else %}
+            <p>We don't have your profile details. <a href="/form">Submit your name</a> or check the <a href="/all-users">list of users</a>.</p>
+        {% endif %}
+
+        <h2>Users</h2>
+        <p><a href="/all-users">View as table → All Users</a></p>
+        <ul>
+            {% for username, details in users.items() %}
+                <li>
+                    {% if details['country'] == 'USA' %}
+                        {{ username }} is {{ details['age'] }} years old from {{ details['country'] }}. Special message for USA users: Welcome!
+                    {% else %}
+                        {{ username }} is {{ details['age'] }} years old from {{ details['country'] }}.
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
     </body>
 </html>
