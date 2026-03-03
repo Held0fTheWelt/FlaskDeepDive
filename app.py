@@ -48,6 +48,11 @@ def all_users():
     return render_template('all_users.html', users=users)
 
 
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    return f"Post {post_id}"
+
+
 if __name__ == "__main__":
     # Launch the Flask dev server 
     app.run(host="0.0.0.0", port=5000)
