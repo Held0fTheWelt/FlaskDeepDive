@@ -26,6 +26,17 @@ def index():
     )
 
 
+@app.route('/greet/<name>')
+def greet(name):
+    return render_template(
+        'index.html',
+        title='Home',
+        user=name.strip(),
+        current_time=datetime.utcnow(),
+        users=users
+    )
+
+
 @app.route('/form')
 def form():
     return render_template('form.html')
