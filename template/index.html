@@ -1,9 +1,11 @@
 <html>
     <head>
         <title>{{ title }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
         <p><a href="/">Home</a> | <a href="/form">Form</a> | <a href="/all-users">All Users</a> | <a href="/update-country">Update Country</a></p>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" width="120">
         <h1>Hello, {{ user }}!</h1>
         <p>Current time (UTC): {{ current_time.strftime('%Y-%m-%d %H:%M:%S') }}</p>
 
