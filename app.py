@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 
 app = Flask(__name__, template_folder='template')
@@ -46,6 +46,20 @@ def form():
 @app.route('/all_users')  # alternative URL (underscore)
 def all_users():
     return render_template('all_users.html', users=users)
+
+
+@app.route('/update-country', methods=['GET', 'POST'])
+def update_country():
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        country = request.form.get('country', '').strip()
+        if not username or not country:
+            return render_template('update_country.html', error='Name and country are required.')
+        if username not in users:
+            return render_template('update_country.html', error=f'User "{username}" not found.')
+        users[username]['country'] = country
+        return redirect(url_for('all_users'))
+    return render_template('update_country.html')
 
 
 @app.route('/post/<int:post_id>')

@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>Update Country</title>
+</head>
+<body>
+    <p><a href="/">Home</a> | <a href="/form">Form</a> | <a href="/all-users">All Users</a> | <a href="/update-country">Update Country</a></p>
+    <h1>Update user country</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="POST" action="/update-country">
+        <label for="username">Name:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="country">Country:</label><br>
+        <input type="text" id="country" name="country" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
